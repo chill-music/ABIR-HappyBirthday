@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday ABIR</title>
+  <meta name="description" content="A special birthday celebration for the most amazing person in my life" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0f;
+      color: #e2e8f0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: rgba(244,63,94,0.3); color: #fff; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(244,63,94,0.2); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(244,63,94,0.4); }
+
+    /* ============================================
+       BACKGROUND
+       ============================================ */
+    .bg-fixed {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    }
+    .bg-orb {
+      position: absolute; border-radius: 50%; filter: blur(128px);
+    }
+    .bg-orb-1 { top: 20%; left: -80px; width: 384px; height: 384px; background: rgba(136,19,55,0.15); }
+    .bg-orb-2 { bottom: 20%; right: -80px; width: 384px; height: 384px; background: rgba(88,28,135,0.15); }
+    .bg-orb-3 { top: 45%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 600px; background: rgba(88,28,100,0.1); }
+
+    /* ============================================
+       FLOATING PARTICLES
+       ============================================ */
+    .particles { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
+    .particle {
+      position: absolute; pointer-events: none;
+      filter: drop-shadow(0 0 6px rgba(255,182,193,0.5));
+    }
+    .particle-heart { color: #ffb6c1; }
+    .particle-star { color: #ffd700; }
+    @keyframes floatP {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      25% { transform: translateY(-30px) translateX(10px); }
+      50% { transform: translateY(-15px) translateX(-10px); }
+      75% { transform: translateY(-40px) translateX(5px); }
+    }
+
+    /* ============================================
+       CONFETTI
+       ============================================ */
+    .confetti-container { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 100; }
+    .confetti-piece {
+      position: absolute; pointer-events: none; z-index: 101;
+    }
+
+    /* ============================================
+       HERO SECTION
+       ============================================ */
+    .hero {
+      position: relative; z-index: 10;
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 80px 16px;
+    }
+
+    /* Date Badge */
+    .date-badge {
+      position: relative; padding: 8px 24px;
+      border-radius: 9999px; border: 1px solid rgba(244,63,94,0.2);
+      background: rgba(136,19,55,0.3); backdrop-filter: blur(8px);
+      margin-bottom: 32px;
+      opacity: 0; transform: translateY(-20px);
+      animation: fadeSlideDown 0.8s 0.3s ease forwards;
+    }
+    .date-badge::before, .date-badge::after {
+      content: ''; position: absolute; top: -4px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #fb7185; animation: pulse 2s infinite;
+    }
+    .date-badge::before { left: -4px; }
+    .date-badge::after { right: -4px; }
+    .date-badge span {
+      color: rgba(252,165,165,0.8); font-size: 14px;
+      font-weight: 300; letter-spacing: 0.3em;
+    }
+
+    /* Happy Birthday Label */
+    .hb-label {
+      color: rgba(251,113,133,0.6); font-size: 12px; letter-spacing: 0.5em;
+      text-transform: uppercase; font-weight: 300; margin-bottom: 16px;
+      opacity: 0; transform: scale(0.9);
+      animation: fadeScale 0.8s 0.6s ease forwards;
+    }
+    @media(min-width:768px) { .hb-label { font-size: 14px; } }
+
+    /* Name */
+    .name-wrapper {
+      position: relative; margin-bottom: 32px;
+      opacity: 0; transform: translateY(30px);
+      animation: fadeSlideUp 1s 0.8s ease forwards;
+    }
+    .name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 12vw, 9rem);
+      font-weight: 700;
+      background: linear-gradient(to bottom, #fda4af, #fecdd3, #fb7185);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; letter-spacing: 0.05em; line-height: 1.1;
+    }
+    .name-glow {
+      position: absolute; inset: 0;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 12vw, 9rem);
+      font-weight: 700; color: rgba(244,63,94,0.2);
+      filter: blur(20px); letter-spacing: 0.05em;
+      line-height: 1.1; user-select: none; pointer-events: none;
+    }
+
+    /* Typewriter */
+    .typewriter-area {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 300; color: rgba(254,205,211,0.9);
+      margin-bottom: 64px; min-height: 2em; text-align: center;
+      opacity: 0;
+      animation: fadeIn 0.8s 1.5s ease forwards;
+    }
+    .typewriter-cursor {
+      display: inline-block; width: 3px; height: 1em;
+      background: #fb7185; margin-right: 4px; vertical-align: middle;
+      animation: blink 0.5s infinite alternate;
+    }
+
+    /* ============================================
+       SURPRISE BOX
+       ============================================ */
+    .surprise-section {
+      width: 100%; display: flex; flex-direction: column;
+      align-items: center; opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    .surprise-section.visible { opacity: 1; }
+
+    .surprise-instruction {
+      color: #fda4af; font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 300; letter-spacing: 0.05em; text-align: center;
+      animation: pulseOpacity 2s infinite; margin-bottom: 24px;
+    }
+    @keyframes pulseOpacity { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+    .gift-box-container {
+      position: relative; cursor: pointer;
+      animation: floatBox 2s ease-in-out infinite;
+      transition: transform 0.2s;
+    }
+    .gift-box-container:hover { transform: scale(1.05) !important; }
+    .gift-box-container:active { transform: scale(0.95) !important; }
+    .gift-box-container svg {
+      filter: drop-shadow(0 10px 30px rgba(244,63,94,0.3));
+      width: clamp(160px, 40vw, 220px); height: auto;
+    }
+    @keyframes floatBox { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    .gift-hint {
+      display: flex; align-items: center; gap: 8px;
+      color: rgba(251,113,133,0.6); font-size: 14px;
+      animation: floatHint 1.5s ease-in-out infinite; margin-top: 24px;
+    }
+    @keyframes floatHint { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+    /* Box open animation */
+    .gift-box-container.opening {
+      animation: boxOpen 0.6s ease forwards !important;
+    }
+    @keyframes boxOpen {
+      0% { transform: scale(1) rotate(0); opacity: 1; }
+      50% { transform: scale(1.15) rotate(3deg); opacity: 1; }
+      100% { transform: scale(0) rotate(10deg); opacity: 0; }
+    }
+
+    /* Video reveal message */
+    .video-reveal-msg {
+      text-align: center; margin-bottom: 32px;
+      opacity: 0; transform: translateY(20px);
+      transition: all 0.6s ease 0.3s;
+    }
+    .video-reveal-msg.visible { opacity: 1; transform: translateY(0); }
+    .video-reveal-msg h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 400;
+      background: linear-gradient(to right, #fcd34d, #fda4af, #f9a8d4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .video-reveal-msg .divider {
+      width: 64px; height: 1px; margin: 12px auto 0;
+      background: linear-gradient(to right, transparent, rgba(251,191,36,0.5), transparent);
+    }
+
+    /* ============================================
+       VIDEO FRAME
+       ============================================ */
+    .video-section {
+      width: 100%; max-width: 640px; margin: 0 auto; padding: 0 16px;
+      opacity: 0; transform: scale(0.5) translateY(50px);
+      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s;
+    }
+    .video-section.visible { opacity: 1; transform: scale(1) translateY(0); }
+
+    .video-outer-glow {
+      position: relative;
+    }
+    .video-outer-glow::before {
+      content: ''; position: absolute; inset: -4px;
+      background: linear-gradient(to right, #f43f5e, #ec4899, #f59e0b);
+      border-radius: 16px; filter: blur(12px); opacity: 0.6;
+      transition: opacity 0.5s;
+    }
+    .video-outer-glow:hover::before { opacity: 1; }
+
+    .video-frame {
+      position: relative;
+      background: linear-gradient(to bottom, #111827, #030712);
+      border-radius: 16px; padding: 4px;
+    }
+    .video-frame-border {
+      position: absolute; inset: 0;
+      border: 1px solid rgba(244,63,94,0.2);
+      border-radius: 16px; pointer-events: none;
+    }
+    .corner { position: absolute; width: 24px; height: 24px; }
+    .corner-tl { top: 8px; left: 8px; border-top: 2px solid rgba(251,113,133,0.6); border-left: 2px solid rgba(251,113,133,0.6); border-radius: 8px 0 0 0; }
+    .corner-tr { top: 8px; right: 8px; border-top: 2px solid rgba(251,113,133,0.6); border-right: 2px solid rgba(251,113,133,0.6); border-radius: 0 8px 0 0; }
+    .corner-bl { bottom: 8px; left: 8px; border-bottom: 2px solid rgba(251,113,133,0.6); border-left: 2px solid rgba(251,113,133,0.6); border-radius: 0 0 0 8px; }
+    .corner-br { bottom: 8px; right: 8px; border-bottom: 2px solid rgba(251,113,133,0.6); border-right: 2px solid rgba(251,113,133,0.6); border-radius: 0 0 8px 0; }
+
+    .video-container {
+      position: relative; border-radius: 12px;
+      overflow: hidden; aspect-ratio: 16/9; background: #000;
+    }
+    .video-container video {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+
+    .video-label {
+      text-align: center; margin-top: 24px;
+      color: rgba(254,205,211,0.8); font-size: 13px;
+      font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase;
+      opacity: 0; transition: opacity 0.8s ease 1.5s;
+    }
+    .video-label.visible { opacity: 1; }
+
+    /* ============================================
+       PHOTO GALLERY
+       ============================================ */
+    .gallery-section {
+      position: relative; z-index: 10;
+      width: 100%; max-width: 800px; margin: 0 auto;
+      padding: 64px 16px;
+      opacity: 0; transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    .gallery-section.visible { opacity: 1; transform: translateY(0); }
+
+    .gallery-title {
+      text-align: center; margin-bottom: 48px;
+    }
+    .gallery-title h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      font-weight: 400;
+      background: linear-gradient(to right, #fda4af, #fecdd3, #fde68a);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 16px;
+    }
+    .gallery-title p {
+      color: rgba(251,113,133,0.4); font-size: 14px;
+      font-weight: 300; letter-spacing: 0.1em;
+    }
+    .gallery-title .divider {
+      width: 96px; height: 1px; margin: 16px auto 0;
+      background: linear-gradient(to right, transparent, rgba(251,113,133,0.5), transparent);
+    }
+
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    @media(min-width:768px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); gap: 24px; } }
+
+    .gift-card {
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      opacity: 0; transform: translateY(50px);
+      transition: all 0.6s ease;
+    }
+    .gift-card.visible { opacity: 1; transform: translateY(0); }
+
+    .gift-card-inner {
+      position: relative; width: 100%; aspect-ratio: 1;
+      cursor: pointer; overflow: hidden; border-radius: 16px;
+    }
+
+    /* Closed gift state */
+    .gift-closed {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(to bottom, #1a0a10, #0d0508);
+      border: 1px solid rgba(244,63,94,0.1);
+      border-radius: 16px; position: relative;
+      animation: floatGift 2.5s ease-in-out infinite;
+      transition: transform 0.2s;
+    }
+    .gift-closed:hover { transform: scale(1.04) !important; }
+    .gift-closed:active { transform: scale(0.97) !important; }
+    .gift-closed svg { width: 80%; height: 80%; filter: drop-shadow(0 8px 20px rgba(244,63,94,0.2)); }
+
+    .gift-closed .tap-hint {
+      position: absolute; bottom: 12px; left: 0; right: 0;
+      text-align: center; font-size: 10px; color: rgba(253,164,175,0.5);
+      letter-spacing: 0.1em; font-weight: 300;
+      animation: pulseOpacity 2s infinite;
+    }
+    @media(min-width:768px) { .gift-closed .tap-hint { font-size: 12px; } }
+
+    @keyframes floatGift { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+    /* Gift opening animation */
+    .gift-closed.opening {
+      animation: giftExplode 0.6s ease forwards !important;
+    }
+    @keyframes giftExplode {
+      0% { transform: scale(1) rotate(0); opacity: 1; }
+      30% { transform: scale(1.15) rotate(3deg); opacity: 1; }
+      60% { transform: scale(1.1) rotate(-3deg); opacity: 0.8; }
+      100% { transform: scale(0) rotate(5deg); opacity: 0; }
+    }
+
+    /* Photo revealed state */
+    .gift-photo {
+      position: absolute; inset: 0; border-radius: 16px;
+      overflow: hidden; opacity: 0; transform: scale(0.8) rotateY(90deg);
+      transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .gift-photo.visible { opacity: 1; transform: scale(1) rotateY(0); }
+
+    .gift-photo .gradient-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom right, rgba(136,19,55,0.4), rgba(88,28,80,0.3), rgba(88,28,135,0.4));
+    }
+    .gift-photo img {
+      position: relative; width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    .gift-photo .hover-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.5), transparent, transparent);
+      opacity: 0; transition: opacity 0.5s; border-radius: 16px;
+    }
+    .gift-card-inner:hover .hover-overlay { opacity: 1; }
+
+    .gift-photo .shine {
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.2) 45%, rgba(255,255,255,0.05) 50%, transparent 60%);
+      background-size: 200% 100%;
+      animation: shineSweep 1.2s ease-in-out 0.3s forwards;
+      background-position: -200% 0;
+    }
+    @keyframes shineSweep { to { background-position: 200% 0; } }
+
+    /* Photo corners */
+    .p-corner { position: absolute; width: 20px; height: 20px; opacity: 0.3; }
+    .p-corner-tl { top: 8px; left: 8px; border-top: 1px solid rgba(251,113,133,0.5); border-left: 1px solid rgba(251,113,133,0.5); border-radius: 4px 0 0 0; }
+    .p-corner-tr { top: 8px; right: 8px; border-top: 1px solid rgba(251,113,133,0.5); border-right: 1px solid rgba(251,113,133,0.5); border-radius: 0 4px 0 0; }
+    .p-corner-bl { bottom: 8px; left: 8px; border-bottom: 1px solid rgba(251,113,133,0.5); border-left: 1px solid rgba(251,113,133,0.5); border-radius: 0 0 0 4px; }
+    .p-corner-br { bottom: 8px; right: 8px; border-bottom: 1px solid rgba(251,113,133,0.5); border-right: 1px solid rgba(251,113,133,0.5); border-radius: 0 0 4px 0; }
+
+    /* Birthday wish under photo */
+    .birthday-wish {
+      color: rgba(254,205,211,0.7); font-size: 12px; font-weight: 300;
+      letter-spacing: 0.05em; text-align: center; font-style: italic;
+      opacity: 0; transform: translateY(10px);
+      transition: all 0.6s ease;
+    }
+    .birthday-wish.visible { opacity: 1; transform: translateY(0); }
+    @media(min-width:768px) { .birthday-wish { font-size: 14px; } }
+
+    /* ============================================
+       LOVE LETTERS
+       ============================================ */
+    .love-section {
+      position: relative; z-index: 10;
+      width: 100%; max-width: 720px; margin: 0 auto;
+      padding: 80px 24px;
+      opacity: 0; transition: opacity 1s ease;
+    }
+    .love-section.visible { opacity: 1; }
+
+    .love-top-deco {
+      display: flex; flex-direction: column; align-items: center; gap: 16px; margin-bottom: 48px;
+    }
+    .love-top-deco .deco-line { width: 128px; height: 1px; background: linear-gradient(to right, transparent, rgba(244,63,94,0.4), transparent); }
+    .love-top-deco .deco-label {
+      color: rgba(244,63,94,0.4); font-size: 11px;
+      letter-spacing: 0.4em; text-transform: uppercase;
+    }
+
+    .love-message-box {
+      min-height: 200px; display: flex; align-items: center; justify-content: center;
+      padding: 0 16px;
+    }
+    .love-message {
+      text-align: center; transition: all 0.8s ease;
+      opacity: 0; transform: translateY(20px);
+    }
+    .love-message.visible { opacity: 1; transform: translateY(0); }
+    .love-message.fading { opacity: 0; transform: translateY(-15px); }
+
+    .love-quote-open {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 4rem);
+      color: rgba(244,63,94,0.2); line-height: 1; margin-bottom: 8px; user-select: none;
+    }
+    .love-text {
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      font-weight: 300; color: rgba(254,205,211,0.8);
+      line-height: 1.7; font-style: italic;
+      min-height: 3.5em;
+    }
+    .love-quote-close {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 4rem);
+      color: rgba(244,63,94,0.2); line-height: 1; margin-top: 8px;
+      text-align: right; user-select: none;
+    }
+
+    /* Dots */
+    .love-dots {
+      display: flex; justify-content: center; gap: 8px; margin-top: 40px;
+      opacity: 0; transition: opacity 1s ease 1s;
+    }
+    .love-dots.visible { opacity: 1; }
+    .love-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(244,63,94,0.15);
+      transition: all 0.4s ease;
+    }
+    .love-dot.active {
+      background: rgba(244,63,94,0.8);
+      transform: scale(1.3);
+    }
+
+    .love-bottom-deco {
+      display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 64px;
+      opacity: 0; transition: opacity 1s ease 0.5s;
+    }
+    .love-bottom-deco.visible { opacity: 1; }
+    .love-heart {
+      color: rgba(244,63,94,0.4);
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+    @keyframes heartbeat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
+    /* ============================================
+       SCROLL INDICATOR
+       ============================================ */
+    .scroll-indicator {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0; transition: opacity 1s ease 2s;
+    }
+    .scroll-indicator.visible { opacity: 0.4; }
+    .scroll-indicator span {
+      color: rgba(244,63,94,0.4); font-size: 11px; letter-spacing: 0.2em;
+    }
+    .scroll-indicator svg { animation: scrollBounce 1.5s ease-in-out infinite; }
+    @keyframes scrollBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    footer {
+      position: relative; z-index: 10;
+      padding: 48px 16px; text-align: center;
+    }
+    .footer-content {
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+      opacity: 0; transition: opacity 1s ease;
+    }
+    .footer-content.visible { opacity: 1; }
+
+    .footer-heart-divider {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .footer-heart-divider .line {
+      width: 64px; height: 1px;
+    }
+    .footer-heart-divider .line-r { background: linear-gradient(to right, transparent, rgba(244,63,94,0.3)); }
+    .footer-heart-divider .line-l { background: linear-gradient(to left, transparent, rgba(244,63,94,0.3)); }
+    .footer-heart-divider .heart { color: rgba(244,63,94,0.5); font-size: 20px; }
+
+    .footer-msg {
+      color: rgba(254,205,211,0.6); font-size: 14px;
+      font-weight: 300; letter-spacing: 0.1em;
+    }
+    .footer-signature {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px; font-weight: 400;
+      background: linear-gradient(to right, #fb7185, #f9a8d4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; letter-spacing: 0.2em;
+      opacity: 0; transform: scale(0.9);
+      transition: all 0.8s ease 0.3s;
+    }
+    .footer-signature.visible { opacity: 1; transform: scale(1); }
+    .footer-year {
+      color: rgba(244,63,94,0.3); font-size: 11px;
+      letter-spacing: 0.3em; margin-top: 16px;
+    }
+
+    /* ============================================
+       KEYFRAMES
+       ============================================ */
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes fadeSlideDown { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeSlideUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeScale { to { opacity: 1; transform: scale(1); } }
+    @keyframes blink { to { opacity: 0; } }
+    @keyframes pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  </style>
+</head>
+<body>
+
+  <!-- Background -->
+  <div class="bg-fixed">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+  </div>
+
+  <!-- Floating Particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Confetti Container -->
+  <div class="confetti-container" id="confetti-container"></div>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero">
+    <!-- Date Badge -->
+    <div class="date-badge"><span>25 / 04</span></div>
+
+    <!-- Happy Birthday Label -->
+    <div class="hb-label">Happy Birthday</div>
+
+    <!-- Name -->
+    <div class="name-wrapper">
+      <div class="name">ABIR</div>
+      <div class="name-glow">ABIR</div>
+    </div>
+
+    <!-- Typewriter -->
+    <div class="typewriter-area">
+      <span id="typewriter-text"></span><span class="typewriter-cursor" id="typewriter-cursor"></span>
+    </div>
+
+    <!-- Surprise Section (hidden until typewriter done) -->
+    <div class="surprise-section" id="surprise-section">
+      <!-- Gift Box (before opening) -->
+      <div id="gift-box-wrapper">
+        <p class="surprise-instruction">Tap the box to reveal your surprise</p>
+        <div class="gift-box-container" id="main-gift-box" onclick="openMainGift()">
+          <svg viewBox="0 0 200 200">
+            <rect x="30" y="90" width="140" height="90" rx="8" fill="#be123c" stroke="#881337" stroke-width="3"/>
+            <rect x="30" y="140" width="140" height="40" fill="#9f1239" opacity="0.4"/>
+            <rect x="90" y="90" width="20" height="90" fill="#fbbf24" rx="2"/>
+            <rect x="30" y="120" width="140" height="20" fill="#fbbf24" rx="2"/>
+            <rect x="92" y="122" width="16" height="16" fill="#fde68a" rx="1" opacity="0.6"/>
+            <rect x="22" y="75" width="156" height="25" rx="6" fill="#e11d48" stroke="#881337" stroke-width="3"/>
+            <rect x="90" y="75" width="20" height="25" fill="#fbbf24" rx="2"/>
+            <ellipse cx="85" cy="68" rx="25" ry="15" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+            <ellipse cx="115" cy="68" rx="25" ry="15" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+            <circle cx="100" cy="72" r="8" fill="#f59e0b"/>
+            <circle cx="100" cy="72" r="5" fill="#fde68a" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="gift-hint">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 110-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 100-5C13 2 12 7 12 7z"/></svg>
+          <span>A special gift just for you</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 110-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 100-5C13 2 12 7 12 7z"/></svg>
+        </div>
+      </div>
+
+      <!-- Video (after opening) -->
+      <div id="video-wrapper" style="display:none; width:100%;">
+        <div class="video-reveal-msg" id="video-reveal-msg">
+          <h3>This is for you, my love</h3>
+          <div class="divider"></div>
+        </div>
+        <div class="video-section" id="video-section">
+          <div class="video-outer-glow">
+            <div class="video-frame">
+              <div class="video-frame-border"></div>
+              <div class="corner corner-tl"></div>
+              <div class="corner corner-tr"></div>
+              <div class="corner corner-bl"></div>
+              <div class="corner corner-br"></div>
+              <div class="video-container">
+                <video controls preload="metadata" playsInline>
+                  <source src="videos/my love.mp4" type="video/mp4" />
+                  Your browser does not support the video element
+                </video>
+              </div>
+            </div>
+            <div class="video-label" id="video-label">A special video for you</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scroll-indicator">
+      <span>Scroll Down</span>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M10 4V16M10 16L5 11M10 16L15 11" stroke="rgba(244,63,94,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== PHOTO GALLERY ===== -->
+  <section class="gallery-section" id="gallery-section">
+    <div class="gallery-title">
+      <h2>Gifts for You</h2>
+      <p>Open each gift to reveal a surprise</p>
+      <div class="divider"></div>
+    </div>
+    <div class="gallery-grid">
+      <!-- Gift Card 1 -->
+      <div class="gift-card" data-index="0">
+        <div class="gift-card-inner" onclick="openGiftCard(0)">
+          <div class="gift-closed" id="gift-closed-0">
+            <svg viewBox="0 0 200 200">
+              <rect x="35" y="95" width="130" height="80" rx="8" fill="#be123c" stroke="#881337" stroke-width="2.5"/>
+              <rect x="35" y="135" width="130" height="40" fill="#9f1239" opacity="0.35"/>
+              <rect x="88" y="95" width="24" height="80" fill="#fbbf24" rx="2"/>
+              <rect x="35" y="120" width="130" height="24" fill="#fbbf24" rx="2"/>
+              <rect x="90" y="122" width="20" height="20" fill="#fde68a" rx="1" opacity="0.5"/>
+              <rect x="28" y="80" width="144" height="22" rx="6" fill="#e11d48" stroke="#881337" stroke-width="2.5"/>
+              <rect x="88" y="80" width="24" height="22" fill="#fbbf24" rx="2"/>
+              <ellipse cx="84" cy="72" rx="22" ry="13" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+              <ellipse cx="116" cy="72" rx="22" ry="13" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+              <circle cx="100" cy="76" r="7" fill="#f59e0b"/>
+              <circle cx="100" cy="76" r="4" fill="#fde68a" opacity="0.5"/>
+            </svg>
+            <div class="tap-hint">Tap to Open</div>
+          </div>
+          <div class="gift-photo" id="gift-photo-0">
+            <div class="gradient-bg"></div>
+            <img src="images/1.png" alt="A beautiful memory" onerror="this.style.display='none'" />
+            <div class="hover-overlay"></div>
+            <div class="p-corner p-corner-tl"></div>
+            <div class="p-corner p-corner-tr"></div>
+            <div class="p-corner p-corner-bl"></div>
+            <div class="p-corner p-corner-br"></div>
+            <div class="shine"></div>
+          </div>
+        </div>
+        <div class="birthday-wish" id="wish-0">Happy Birthday to You</div>
+      </div>
+
+      <!-- Gift Card 2 -->
+      <div class="gift-card" data-index="1">
+        <div class="gift-card-inner" onclick="openGiftCard(1)">
+          <div class="gift-closed" id="gift-closed-1">
+            <svg viewBox="0 0 200 200">
+              <rect x="35" y="95" width="130" height="80" rx="8" fill="#be123c" stroke="#881337" stroke-width="2.5"/>
+              <rect x="35" y="135" width="130" height="40" fill="#9f1239" opacity="0.35"/>
+              <rect x="88" y="95" width="24" height="80" fill="#fbbf24" rx="2"/>
+              <rect x="35" y="120" width="130" height="24" fill="#fbbf24" rx="2"/>
+              <rect x="90" y="122" width="20" height="20" fill="#fde68a" rx="1" opacity="0.5"/>
+              <rect x="28" y="80" width="144" height="22" rx="6" fill="#e11d48" stroke="#881337" stroke-width="2.5"/>
+              <rect x="88" y="80" width="24" height="22" fill="#fbbf24" rx="2"/>
+              <ellipse cx="84" cy="72" rx="22" ry="13" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+              <ellipse cx="116" cy="72" rx="22" ry="13" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+              <circle cx="100" cy="76" r="7" fill="#f59e0b"/>
+              <circle cx="100" cy="76" r="4" fill="#fde68a" opacity="0.5"/>
+            </svg>
+            <div class="tap-hint">Tap to Open</div>
+          </div>
+          <div class="gift-photo" id="gift-photo-1">
+            <div class="gradient-bg"></div>
+            <img src="images/2.jpeg" alt="A beautiful memory" onerror="this.style.display='none'" />
+            <div class="hover-overlay"></div>
+            <div class="p-corner p-corner-tl"></div>
+            <div class="p-corner p-corner-tr"></div>
+            <div class="p-corner p-corner-bl"></div>
+            <div class="p-corner p-corner-br"></div>
+            <div class="shine"></div>
+          </div>
+        </div>
+        <div class="birthday-wish" id="wish-1">Happy Birthday to You</div>
+      </div>
+
+      <!-- Gift Card 3 -->
+      <div class="gift-card" data-index="2">
+        <div class="gift-card-inner" onclick="openGiftCard(2)">
+          <div class="gift-closed" id="gift-closed-2">
+            <svg viewBox="0 0 200 200">
+              <rect x="35" y="95" width="130" height="80" rx="8" fill="#be123c" stroke="#881337" stroke-width="2.5"/>
+              <rect x="35" y="135" width="130" height="40" fill="#9f1239" opacity="0.35"/>
+              <rect x="88" y="95" width="24" height="80" fill="#fbbf24" rx="2"/>
+              <rect x="35" y="120" width="130" height="24" fill="#fbbf24" rx="2"/>
+              <rect x="90" y="122" width="20" height="20" fill="#fde68a" rx="1" opacity="0.5"/>
+              <rect x="28" y="80" width="144" height="22" rx="6" fill="#e11d48" stroke="#881337" stroke-width="2.5"/>
+              <rect x="88" y="80" width="24" height="22" fill="#fbbf24" rx="2"/>
+              <ellipse cx="84" cy="72" rx="22" ry="13" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+              <ellipse cx="116" cy="72" rx="22" ry="13" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+              <circle cx="100" cy="76" r="7" fill="#f59e0b"/>
+              <circle cx="100" cy="76" r="4" fill="#fde68a" opacity="0.5"/>
+            </svg>
+            <div class="tap-hint">Tap to Open</div>
+          </div>
+          <div class="gift-photo" id="gift-photo-2">
+            <div class="gradient-bg"></div>
+            <img src="images/3.png" alt="A beautiful memory" onerror="this.style.display='none'" />
+            <div class="hover-overlay"></div>
+            <div class="p-corner p-corner-tl"></div>
+            <div class="p-corner p-corner-tr"></div>
+            <div class="p-corner p-corner-bl"></div>
+            <div class="p-corner p-corner-br"></div>
+            <div class="shine"></div>
+          </div>
+        </div>
+        <div class="birthday-wish" id="wish-2">Happy Birthday to You</div>
+      </div>
+
+      <!-- Gift Card 4 -->
+      <div class="gift-card" data-index="3">
+        <div class="gift-card-inner" onclick="openGiftCard(3)">
+          <div class="gift-closed" id="gift-closed-3">
+            <svg viewBox="0 0 200 200">
+              <rect x="35" y="95" width="130" height="80" rx="8" fill="#be123c" stroke="#881337" stroke-width="2.5"/>
+              <rect x="35" y="135" width="130" height="40" fill="#9f1239" opacity="0.35"/>
+              <rect x="88" y="95" width="24" height="80" fill="#fbbf24" rx="2"/>
+              <rect x="35" y="120" width="130" height="24" fill="#fbbf24" rx="2"/>
+              <rect x="90" y="122" width="20" height="20" fill="#fde68a" rx="1" opacity="0.5"/>
+              <rect x="28" y="80" width="144" height="22" rx="6" fill="#e11d48" stroke="#881337" stroke-width="2.5"/>
+              <rect x="88" y="80" width="24" height="22" fill="#fbbf24" rx="2"/>
+              <ellipse cx="84" cy="72" rx="22" ry="13" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+              <ellipse cx="116" cy="72" rx="22" ry="13" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+              <circle cx="100" cy="76" r="7" fill="#f59e0b"/>
+              <circle cx="100" cy="76" r="4" fill="#fde68a" opacity="0.5"/>
+            </svg>
+            <div class="tap-hint">Tap to Open</div>
+          </div>
+          <div class="gift-photo" id="gift-photo-3">
+            <div class="gradient-bg"></div>
+            <img src="images/4.png" alt="A beautiful memory" onerror="this.style.display='none'" />
+            <div class="hover-overlay"></div>
+            <div class="p-corner p-corner-tl"></div>
+            <div class="p-corner p-corner-tr"></div>
+            <div class="p-corner p-corner-bl"></div>
+            <div class="p-corner p-corner-br"></div>
+            <div class="shine"></div>
+          </div>
+        </div>
+        <div class="birthday-wish" id="wish-3">Happy Birthday to You</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LOVE LETTERS ===== -->
+  <section class="love-section" id="love-section">
+    <div class="love-top-deco">
+      <div class="deco-line"></div>
+      <span class="deco-label">Words from my heart</span>
+    </div>
+
+    <div class="love-message-box">
+      <div class="love-message" id="love-message">
+        <div class="love-quote-open">&ldquo;</div>
+        <p class="love-text" id="love-text"></p>
+        <div class="love-quote-close">&rdquo;</div>
+      </div>
+    </div>
+
+    <div class="love-dots" id="love-dots">
+      <div class="love-dot" data-i="0"></div>
+      <div class="love-dot" data-i="1"></div>
+      <div class="love-dot" data-i="2"></div>
+      <div class="love-dot" data-i="3"></div>
+      <div class="love-dot" data-i="4"></div>
+      <div class="love-dot" data-i="5"></div>
+      <div class="love-dot" data-i="6"></div>
+    </div>
+
+    <div class="love-bottom-deco">
+      <div class="love-heart">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
+      <div class="deco-line" style="width:128px;height:1px;background:linear-gradient(to right,transparent,rgba(244,63,94,0.4),transparent);"></div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-content" id="footer-content">
+      <div class="footer-heart-divider">
+        <div class="line line-r"></div>
+        <span class="heart">&#10084;</span>
+        <div class="line line-l"></div>
+      </div>
+      <p class="footer-msg">With all my love and admiration</p>
+      <div class="footer-signature" id="footer-sig">ABIR</div>
+      <p class="footer-year">2026</p>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       JAVASCRIPT
+       ============================================ -->
+  <script>
+    // ==========================================
+    // SEEDED RANDOM (for particles — no hydration issues)
+    // ==========================================
+    function seededRandom(seed) {
+      const x = Math.sin(seed * 127.1 + 311.7) * 43758.5453;
+      return x - Math.floor(x);
+    }
+
+    // ==========================================
+    // FLOATING PARTICLES
+    // ==========================================
+    (function createParticles() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 30; i++) {
+        const el = document.createElement('div');
+        el.className = 'particle ' + (seededRandom(i * 31 + 6) > 0.5 ? 'particle-heart' : 'particle-star');
+        const size = seededRandom(i * 17 + 3) * 16 + 8;
+        const dur = seededRandom(i * 23 + 4) * 12 + 8;
+        const delay = seededRandom(i * 29 + 5) * 8;
+        el.textContent = el.classList.contains('particle-heart') ? '\u2764' : '\u2733';
+        el.style.cssText = 'left:' + (seededRandom(i*7+1)*100) + '%;top:' + (seededRandom(i*13+2)*100) + '%;font-size:' + size + 'px;opacity:' + (seededRandom(i*37+7)*0.4+0.1) + ';animation:floatP ' + dur + 's ease-in-out ' + delay + 's infinite;';
+        container.appendChild(el);
+      }
+    })();
+
+    // ==========================================
+    // TYPEWRITER
+    // ==========================================
+    const TYPEWRITER_TEXT = "Happy Birthday to the most beautiful soul I know";
+    let twIndex = 0;
+    const twEl = document.getElementById('typewriter-text');
+    const twCursor = document.getElementById('typewriter-cursor');
+
+    function typeChar() {
+      if (twIndex < TYPEWRITER_TEXT.length) {
+        twEl.textContent += TYPEWRITER_TEXT[twIndex];
+        twIndex++;
+        setTimeout(typeChar, 100);
+      } else {
+        onTypewriterDone();
+      }
+    }
+    setTimeout(typeChar, 1500);
+
+    function onTypewriterDone() {
+      // Show surprise section
+      setTimeout(function() {
+        document.getElementById('surprise-section').classList.add('visible');
+        document.getElementById('scroll-indicator').classList.add('visible');
+      }, 800);
+    }
+
+    // ==========================================
+    // MAIN GIFT BOX
+    // ==========================================
+    let mainOpened = false;
+    function openMainGift() {
+      if (mainOpened) return;
+      mainOpened = true;
+
+      var box = document.getElementById('main-gift-box');
+      box.classList.add('opening');
+
+      // Fire confetti
+      fireConfetti();
+
+      setTimeout(function() {
+        document.getElementById('gift-box-wrapper').style.display = 'none';
+        document.getElementById('video-wrapper').style.display = 'block';
+        setTimeout(function() {
+          document.getElementById('video-reveal-msg').classList.add('visible');
+          document.getElementById('video-section').classList.add('visible');
+          document.getElementById('video-label').classList.add('visible');
+        }, 100);
+      }, 600);
+    }
+
+    // ==========================================
+    // CONFETTI
+    // ==========================================
+    function fireConfetti() {
+      var container = document.getElementById('confetti-container');
+      var colors = ['#ff6b6b','#ffd93d','#6bcb77','#4d96ff','#ff6b9d','#c44dff','#ff9f43','#00d2d3','#ff4757','#ffa502','#7bed9f','#70a1ff','#f368e0','#ff9ff3','#feca57','#48dbfb'];
+
+      function burst() {
+        var pieces = [];
+        for (var i = 0; i < 150; i++) {
+          var el = document.createElement('div');
+          el.className = 'confetti-piece';
+          var size = Math.random() * 10 + 5;
+          var isCircle = Math.random() > 0.5;
+          el.style.cssText = 'left:50%;top:50%;width:'+size+'px;height:'+(isCircle ? size : size*0.6)+'px;background:'+colors[Math.floor(Math.random()*colors.length)]+';border-radius:'+(isCircle?'50%':'2px')+';box-shadow:0 0 '+(size/2)+'px '+colors[Math.floor(Math.random()*colors.length)]+'40;';
+          container.appendChild(el);
+          pieces.push({
+            el: el,
+            vx: (Math.random()-0.5)*200,
+            vy: -(Math.random()*400+200),
+            rot: Math.random()*360,
+            rotS: Math.random()*720-360
+          });
+        }
+        var start = performance.now();
+        function animate(now) {
+          var t = (now - start) / 1000;
+          var p = t / 4;
+          if (p > 1) { pieces.forEach(function(pc){ pc.el.remove(); }); return; }
+          pieces.forEach(function(pc){
+            var x = pc.vx * t;
+            var y = pc.vy * t + 0.5 * 600 * t * t;
+            var r = pc.rot + pc.rotS * t;
+            var o = p > 0.7 ? 1-(p-0.7)/0.3 : 1;
+            pc.el.style.transform = 'translate(calc(-50% + '+x+'px), calc(-50% + '+y+'px)) rotate('+r+'deg)';
+            pc.el.style.opacity = o;
+          });
+          requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+      }
+
+      burst();
+      setTimeout(burst, 300);
+      setTimeout(burst, 700);
+    }
+
+    // ==========================================
+    // GALLERY GIFT CARDS
+    // ==========================================
+    var giftStates = [false, false, false, false];
+
+    function openGiftCard(index) {
+      if (giftStates[index]) return;
+      giftStates[index] = true;
+
+      var closed = document.getElementById('gift-closed-' + index);
+      var photo = document.getElementById('gift-photo-' + index);
+      var wish = document.getElementById('wish-' + index);
+
+      closed.classList.add('opening');
+
+      setTimeout(function() {
+        closed.style.display = 'none';
+        photo.classList.add('visible');
+      }, 600);
+
+      setTimeout(function() {
+        wish.classList.add('visible');
+      }, 1400);
+    }
+
+    // ==========================================
+    // LOVE LETTERS (typewriter cycling)
+    // ==========================================
+    var loveMessages = [
+      "Every moment with you feels like a beautiful dream I never want to wake up from",
+      "You are not just someone I love, you are the reason I believe in love itself",
+      "Your smile is my favorite thing in this entire world, it lights up my darkest days",
+      "I fall in love with you a little more every single day, and I never want it to stop",
+      "You are my today, all of my tomorrows, and every beautiful memory in between",
+      "In a world full of ordinary, you are my extraordinary, my once in a lifetime",
+      "I thank the stars every night for bringing you into my life, my heart found its home in you"
+    ];
+
+    var loveIndex = 0;
+    var loveStarted = false;
+    var loveTyping = false;
+
+    function startLoveLetters() {
+      if (loveStarted) return;
+      loveStarted = true;
+      typeLoveMessage(loveIndex);
+    }
+
+    function typeLoveMessage(idx) {
+      loveTyping = true;
+      var msg = document.getElementById('love-message');
+      var text = document.getElementById('love-text');
+      var dots = document.querySelectorAll('.love-dot');
+
+      // Reset
+      msg.classList.remove('visible', 'fading');
+      text.textContent = '';
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+
+      // Show container
+      void msg.offsetWidth;
+      msg.classList.add('visible');
+
+      // Type
+      var i = 0;
+      var fullText = loveMessages[idx];
+      var interval = setInterval(function() {
+        if (i < fullText.length) {
+          text.textContent += fullText[i];
+          i++;
+        } else {
+          clearInterval(interval);
+          loveTyping = false;
+          // Pause then fade and next
+          setTimeout(function() {
+            msg.classList.add('fading');
+            msg.classList.remove('visible');
+            setTimeout(function() {
+              loveIndex = (loveIndex + 1) % loveMessages.length;
+              typeLoveMessage(loveIndex);
+            }, 800);
+          }, 3000);
+        }
+      }, 40);
+    }
+
+    // ==========================================
+    // INTERSECTION OBSERVER (scroll animations)
+    // ==========================================
+    var observerOptions = { threshold: 0.2 };
+
+    // Gallery cards
+    var cardObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var index = parseInt(entry.target.dataset.index);
+          setTimeout(function() {
+            entry.target.classList.add('visible');
+          }, index * 150);
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.gift-card').forEach(function(card) {
+      cardObserver.observe(card);
+    });
+
+    // Gallery section
+    var sectionObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          sectionObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    sectionObserver.observe(document.getElementById('gallery-section'));
+
+    // Love section
+    var loveObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          document.getElementById('love-dots').classList.add('visible');
+          document.querySelector('.love-bottom-deco').classList.add('visible');
+          startLoveLetters();
+          loveObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    loveObserver.observe(document.getElementById('love-section'));
+
+    // Footer
+    var footerObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          setTimeout(function() {
+            document.getElementById('footer-sig').classList.add('visible');
+          }, 300);
+          footerObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    footerObserver.observe(document.getElementById('footer-content'));
+  </script>
+</body>
+</html>
